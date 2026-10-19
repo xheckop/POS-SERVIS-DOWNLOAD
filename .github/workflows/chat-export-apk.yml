@@ -8,15 +8,17 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Download official signed Android APK
+      - name: Download original verified Android APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release download latest -R "${GITHUB_REPOSITORY}" --pattern POS-Servis-AKTUALIZACE.apk
-          echo "196d2542c96698d7cecb0c67dc9c316bcc61b10ab7c7ba79d007fd213508fa75  POS-Servis-AKTUALIZACE.apk" | sha256sum -c -
-      - name: Publish as artifact
+          gh release download latest -R "${GITHUB_REPOSITORY}" --pattern PUBLIC-SHA256SUMS.txt
+          sha256sum -c PUBLIC-SHA256SUMS.txt
+          echo "482c8d0c950ce909fa46bad1618341d828bd7fcd1c9a07fff3e93c8e9af60a15  POS-Servis-AKTUALIZACE.apk" | sha256sum -c -
+      - name: Publish signed original APK as ChatGPT artifact
         uses: actions/upload-artifact@v4
         with:
-          name: POS-Servis-0.21.1.175-ORIGINAL-APK
+          name: POS-Servis-0.21.1.178-ORIGINAL-APK
           path: POS-Servis-AKTUALIZACE.apk
           retention-days: 1
