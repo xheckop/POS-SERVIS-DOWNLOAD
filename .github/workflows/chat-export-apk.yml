@@ -8,17 +8,17 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Download and verify official POS Servis APK
+      - name: Download and verify original signed APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release download latest -R "${GITHUB_REPOSITORY}" --pattern POS-Servis-AKTUALIZACE.apk
           gh release download latest -R "${GITHUB_REPOSITORY}" --pattern PUBLIC-SHA256SUMS.txt
           sha256sum -c PUBLIC-SHA256SUMS.txt
-          echo "5a87cffb04563059865598f70558dafacb679ae732cfa7c2ef5d49592a312c56  POS-Servis-AKTUALIZACE.apk" | sha256sum -c -
-      - name: Stage verified APK for direct chat attachment
+          echo "b957df52f406553b4507849c77389d0a3da53118fe0416ec1157fcfd3b8b86f6  POS-Servis-AKTUALIZACE.apk" | sha256sum -c -
+      - name: Stage verified original APK as chat attachment
         uses: actions/upload-artifact@v4
         with:
-          name: POS-Servis-0.21.1.195-ORIGINAL-APK
+          name: POS-Servis-0.21.1.197-ORIGINAL-APK
           path: POS-Servis-AKTUALIZACE.apk
           retention-days: 1
