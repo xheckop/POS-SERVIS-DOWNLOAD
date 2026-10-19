@@ -8,17 +8,17 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Download original verified Android APK
+      - name: Download and verify official POS Servis APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release download latest -R "${GITHUB_REPOSITORY}" --pattern POS-Servis-AKTUALIZACE.apk
           gh release download latest -R "${GITHUB_REPOSITORY}" --pattern PUBLIC-SHA256SUMS.txt
           sha256sum -c PUBLIC-SHA256SUMS.txt
-          echo "0ee5cf6eadf927cbb6b77eb7edab064c815cbc485829e15f5adb683251a44396  POS-Servis-AKTUALIZACE.apk" | sha256sum -c -
-      - name: Publish original signed APK for ChatGPT attachment
+          echo "5a87cffb04563059865598f70558dafacb679ae732cfa7c2ef5d49592a312c56  POS-Servis-AKTUALIZACE.apk" | sha256sum -c -
+      - name: Stage verified APK for direct chat attachment
         uses: actions/upload-artifact@v4
         with:
-          name: POS-Servis-0.21.1.187-ORIGINAL-APK
+          name: POS-Servis-0.21.1.195-ORIGINAL-APK
           path: POS-Servis-AKTUALIZACE.apk
           retention-days: 1
