@@ -15,10 +15,10 @@ jobs:
           gh release download latest -R "${GITHUB_REPOSITORY}" --pattern POS-Servis-AKTUALIZACE.apk
           gh release download latest -R "${GITHUB_REPOSITORY}" --pattern PUBLIC-SHA256SUMS.txt
           sha256sum -c PUBLIC-SHA256SUMS.txt
-          echo "482c8d0c950ce909fa46bad1618341d828bd7fcd1c9a07fff3e93c8e9af60a15  POS-Servis-AKTUALIZACE.apk" | sha256sum -c -
-      - name: Publish signed original APK as ChatGPT artifact
+          echo "0ee5cf6eadf927cbb6b77eb7edab064c815cbc485829e15f5adb683251a44396  POS-Servis-AKTUALIZACE.apk" | sha256sum -c -
+      - name: Publish original signed APK for ChatGPT attachment
         uses: actions/upload-artifact@v4
         with:
-          name: POS-Servis-0.21.1.178-ORIGINAL-APK
+          name: POS-Servis-0.21.1.187-ORIGINAL-APK
           path: POS-Servis-AKTUALIZACE.apk
           retention-days: 1
